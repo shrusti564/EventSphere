@@ -109,4 +109,57 @@ Admin scans QR →
 - Validates ticket
 - Marks entry status
 
+
+
 ---
+## 🛠️ Setup & Run Locally
+
+### Prerequisites
+- Node.js (LTS) and npm
+- A MongoDB database (free MongoDB Atlas cluster, or local MongoDB)
+- A Gmail account with an App Password (for email notifications)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/shrusti564/EventSphere.git
+cd EventSphere
+```
+
+### 2. Install dependencies
+```bash
+cd backend
+npm install
+```
+
+### 3. Create the `.env` file
+Create a file named `.env` inside the `backend` folder with the following:
+
+```
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+JWT_SECRET=your_random_secret
+EMAIL_USER=your_gmail_address
+EMAIL_PASS=your_gmail_app_password
+```
+
+- `MONGO_URI`: connection string from MongoDB Atlas (include a database name before the `?`)
+- `JWT_SECRET`: any long random string. Generate one with:
+  `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
+- `EMAIL_PASS`: a 16-character Gmail App Password (no spaces), not your normal password
+
+### 4. Start the server
+```bash
+node server.js
+```
+You should see `Server running on 5000` and `MongoDB Connected`.
+
+### 5. Open the app
+Go to http://localhost:5000
+
+### Creating an Admin account
+Registration always creates a **Student**. To make an admin:
+1. Register a new account with an `@msrit.edu` email.
+2. In MongoDB Atlas, open the `users` collection and change that user's `role` to `Admin`.
+3. Log out and log in again.
+
+> Note: the `.env` file is private and is not included in this repository.
